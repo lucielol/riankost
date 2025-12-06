@@ -1,11 +1,8 @@
+import { UserController } from "@/controller/user.controller";
 import { Hono } from "hono";
 
 const userRouter = new Hono();
 
-userRouter.get("/", (c) => {
-  return c.json({
-    message: "User router",
-  });
-});
+userRouter.get("/", UserController.getUsers);
 
 export default userRouter;

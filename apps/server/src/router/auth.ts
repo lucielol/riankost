@@ -1,10 +1,8 @@
-import { auth } from "@repo/auth";
+import { AuthController } from "@/controller/auth.controller";
 import { Hono } from "hono";
 
 const authRouter = new Hono();
 
-authRouter.on(["POST", "GET"], "/*", (c) => {
-  return auth.handler(c.req.raw);
-});
+authRouter.on(["POST", "GET"], "/*", AuthController.handler);
 
 export default authRouter;
