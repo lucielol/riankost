@@ -90,7 +90,7 @@ export default function WhatsappPage() {
                   <div className="pt-4">
                     <Button
                       variant="link"
-                      className="h-auto p-0 text-primary"
+                      className="h-auto p-0 text-primary underline hover:cursor-pointer"
                       onClick={() =>
                         setLoginMethod(loginMethod === "qr" ? "phone" : "qr")
                       }
