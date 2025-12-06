@@ -1,0 +1,38 @@
+{
+  "name": "workspace",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "check-types": "turbo check-types",
+    "dev:native": "turbo -F native dev",
+    "dev:web": "turbo -F web dev",
+    "dev:server": "turbo -F server dev",
+    "dev:dashboard": "turbo -F dashboard dev",
+    "dev:auth": "turbo -F auth dev",
+    "db:push": "turbo -F @repo/db db:push",
+    "db:studio": "turbo -F @repo/db db:studio",
+    "db:generate": "turbo -F @repo/db db:generate",
+    "db:migrate": "turbo -F @repo/db db:migrate",
+    "db:start": "turbo -F @repo/db db:start",
+    "db:watch": "turbo -F @repo/db db:watch",
+    "db:stop": "turbo -F @repo/db db:stop",
+    "db:down": "turbo -F @repo/db db:down"
+  },
+  "dependencies": {
+    "@trpc/client": "catalog:",
+    "@trpc/tanstack-react-query": "^11.7.2",
+    "dotenv": "^17.2.2",
+    "zod": "^4.1.11"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.11",
+    "turbo": "^2.5.4"
+  },
+  "packageManager": "pnpm@10.21.0"
+}

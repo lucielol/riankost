@@ -1,0 +1,23 @@
+name: riankost
+
+services:
+  postgres:
+    image: postgres
+    container_name: riankost-postgres
+    environment:
+      POSTGRES_DB: riankost
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: 1337
+    ports:
+      - "5432:5432"
+    volumes:
+      - riankost_postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  riankost_postgres_data:

@@ -1,0 +1,17 @@
+{
+  "extends": "@repo/config/react-library.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "baseUrl": ".",
+    "rootDir": ".",
+    "paths": {
+      "@workspace/ui/*": ["./src/*"]
+      // "@repo/lib/utils": ["./src/lib/utils"],
+      // "@repo/utils/*": ["./src/utils/*"]
+      // "@workspace/ui/*": ["../../packages/ui/src/*"],
+      // "@/*": ["./src/*"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}
