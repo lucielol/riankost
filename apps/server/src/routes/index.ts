@@ -1,7 +1,7 @@
 import { Hono } from "hono";
-import authRouter from "@/router/auth";
-import userRouter from "@/router/user";
-import whatsappRouter from "@/router/whatsapp";
+import authRouter from "@/routes/auth";
+import userRouter from "@/routes/user";
+import whatsappRouter from "@/routes/whatsapp";
 
 const router = new Hono();
 

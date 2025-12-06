@@ -1,4 +1,4 @@
-import { WhatsappController } from "@/controller/whatsapp.controller";
+import { WhatsappController } from "@/controllers/whatsapp.controller";
 import { Hono } from "hono";
 
 const whatsappRouter = new Hono();

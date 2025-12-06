@@ -5,7 +5,7 @@ import { appRouter } from "@repo/api/routers/index";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
-import router from "./router";
+import router from "@/routes";
 
 const app = new Hono();
 

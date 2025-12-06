@@ -1,4 +1,4 @@
-import { AuthController } from "@/controller/auth.controller";
+import { AuthController } from "@/controllers/auth.controller";
 import { Hono } from "hono";
 
 const authRouter = new Hono();
