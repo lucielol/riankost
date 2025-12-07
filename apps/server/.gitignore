@@ -2,6 +2,7 @@
 dist/
 /build
 /out/
+auth_info_baileys
 
 # dev
 .yarn/

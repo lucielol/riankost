@@ -1,8 +1,8 @@
 import type { Context } from "hono";
 
 export const UserController = {
-  getUsers: (c: Context) => {
-    return c.json({
+  getUsers: (ctx: Context) => {
+    return ctx.json({
       message: "User router",
     });
   },

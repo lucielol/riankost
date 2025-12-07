@@ -18,12 +18,6 @@ catalogs:
     better-auth:
       specifier: 1.4.5
       version: 1.4.5
-    dotenv:
-      specifier: ^17.2.2
-      version: 17.2.3
-    hono:
-      specifier: ^4.8.2
-      version: 4.10.7
 
 importers:
 
@@ -157,6 +151,9 @@ importers:
       '@tanstack/react-query':
         specifier: ^5.85.5
         version: 5.90.12(react@19.1.2)
+      '@tanstack/react-table':
+        specifier: ^8.21.3
+        version: 8.21.3(react-dom@19.1.2(react@19.1.2))(react@19.1.2)
       '@trpc/client':
         specifier: 'catalog:'
         version: 11.7.2(@trpc/server@11.7.2(typescript@5.9.3))(typescript@5.9.3)
@@ -184,6 +181,9 @@ importers:
       next-themes:
         specifier: ^0.4.6
         version: 0.4.6(react-dom@19.1.2(react@19.1.2))(react@19.1.2)
+      qrcode.react:
+        specifier: ^4.2.0
+        version: 4.2.0(react@19.1.2)
       react:
         specifier: 19.1.2
         version: 19.1.2
@@ -227,9 +227,6 @@ importers:
 
   apps/server:
     dependencies:
-      '@hapi/boom':
-        specifier: ^10.0.1
-        version: 10.0.1
       '@hono/node-server':
         specifier: ^1.14.4
         version: 1.19.6(hono@4.10.7)
@@ -248,9 +245,6 @@ importers:
       '@trpc/server':
         specifier: 'catalog:'
         version: 11.7.2(typescript@5.9.3)
-      baileys:
-        specifier: 7.0.0-rc.9
-        version: 7.0.0-rc.9(sharp@0.34.5)
       better-auth:
         specifier: 'catalog:'
         version: 1.4.5(next@16.0.7(babel-plugin-react-compiler@1.0.0)(react-dom@19.1.2(react@19.1.2))(react@19.1.2))(react-dom@19.1.2(react@19.1.2))(react@19.1.2)
@@ -278,94 +272,6 @@ importers:
         version: 4.21.0
       typescript:
         specifier: ^5.8.2
-        version: 5.9.3
-
-  apps/voucher:
-    dependencies:
-      '@prisma/client':
-        specifier: 'catalog:'
-        version: 7.1.0(prisma@7.1.0(@types/react@19.2.2)(react-dom@19.1.2(react@19.1.2))(react@19.1.2)(typescript@5.9.3))(typescript@5.9.3)
-      '@repo/api':
-        specifier: workspace:*
-        version: link:../../packages/api
-      '@repo/auth':
-        specifier: workspace:*
-        version: link:../../packages/auth
-      '@repo/ui':
-        specifier: workspace:*
-        version: link:../../packages/ui
-      '@tanstack/react-form':
-        specifier: ^1.12.3
-        version: 1.27.1(react-dom@19.1.2(react@19.1.2))(react@19.1.2)
-      '@tanstack/react-query':
-        specifier: ^5.85.5
-        version: 5.90.12(react@19.1.2)
-      '@trpc/client':
-        specifier: 'catalog:'
-        version: 11.7.2(@trpc/server@11.7.2(typescript@5.9.3))(typescript@5.9.3)
-      '@trpc/server':
-        specifier: 'catalog:'
-        version: 11.7.2(typescript@5.9.3)
-      '@trpc/tanstack-react-query':
-        specifier: ^11.5.0
-        version: 11.7.2(@tanstack/react-query@5.90.12(react@19.1.2))(@trpc/client@11.7.2(@trpc/server@11.7.2(typescript@5.9.3))(typescript@5.9.3))(@trpc/server@11.7.2(typescript@5.9.3))(react-dom@19.1.2(react@19.1.2))(react@19.1.2)(typescript@5.9.3)
-      babel-plugin-react-compiler:
-        specifier: ^1.0.0
-        version: 1.0.0
-      better-auth:
-        specifier: 'catalog:'
-        version: 1.4.5(next@16.0.7(babel-plugin-react-compiler@1.0.0)(react-dom@19.1.2(react@19.1.2))(react@19.1.2))(react-dom@19.1.2(react@19.1.2))(react@19.1.2)
-      framer-motion:
-        specifier: ^12.23.25
-        version: 12.23.25(react-dom@19.1.2(react@19.1.2))(react@19.1.2)
-      lucide-react:
-        specifier: ^0.546.0
-        version: 0.546.0(react@19.1.2)
-      next:
-        specifier: ^16.0.7
-        version: 16.0.7(babel-plugin-react-compiler@1.0.0)(react-dom@19.1.2(react@19.1.2))(react@19.1.2)
-      next-themes:
-        specifier: ^0.4.6
-        version: 0.4.6(react-dom@19.1.2(react@19.1.2))(react@19.1.2)
-      react:
-        specifier: 19.1.2
-        version: 19.1.2
-      react-dom:
-        specifier: 19.1.2
-        version: 19.1.2(react@19.1.2)
-      sonner:
-        specifier: ^2.0.5
-        version: 2.0.7(react-dom@19.1.2(react@19.1.2))(react@19.1.2)
-      tailwind-merge:
-        specifier: ^3.3.1
-        version: 3.4.0
-      tw-animate-css:
-        specifier: ^1.3.4
-        version: 1.4.0
-    devDependencies:
-      '@repo/config':
-        specifier: workspace:*
-        version: link:../../packages/config
-      '@tailwindcss/postcss':
-        specifier: ^4.1.10
-        version: 4.1.17
-      '@tanstack/react-query-devtools':
-        specifier: ^5.85.5
-        version: 5.91.1(@tanstack/react-query@5.90.12(react@19.1.2))(react@19.1.2)
-      '@types/node':
-        specifier: ^20
-        version: 20.19.25
-      '@types/react':
-        specifier: 19.2.2
-        version: 19.2.2
-      '@types/react-dom':
-        specifier: 19.2.2
-        version: 19.2.2(@types/react@19.2.2)
-      tailwindcss:
-        specifier: ^4.1.10
-        version: 4.1.17
-      typescript:
-        specifier: ^5
         version: 5.9.3
 
   apps/web:
@@ -458,6 +364,9 @@ importers:
 
   packages/api:
     dependencies:
+      '@hapi/boom':
+        specifier: ^10.0.1
+        version: 10.0.1
       '@repo/auth':
         specifier: workspace:*
         version: link:../auth
@@ -470,12 +379,18 @@ importers:
       '@trpc/server':
         specifier: 'catalog:'
         version: 11.7.2(typescript@5.9.3)
+      baileys:
+        specifier: 7.0.0-rc.9
+        version: 7.0.0-rc.9(sharp@0.34.5)
       dotenv:
         specifier: 'catalog:'
         version: 17.2.3
       hono:
         specifier: 'catalog:'
         version: 4.10.7
+      superjson:
+        specifier: ^2.2.2
+        version: 2.2.6
       typescript:
         specifier: ^5
         version: 5.9.3
@@ -2322,11 +2237,22 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
+  '@tanstack/react-table@8.21.3':
+    resolution: {integrity: sha512-5nNMTSETP4ykGegmVkhjcS8tTLW6Vl4axfEGQN3v0zdHYbK4UfoqfPChclTrJ4EoK9QynqAu9oUf8VEmrpZ5Ww==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      react: '>=16.8'
+      react-dom: '>=16.8'
+
   '@tanstack/store@0.7.7':
     resolution: {integrity: sha512-xa6pTan1bcaqYDS9BDpSiS63qa6EoDkPN9RsRaxHuDdVDNntzq3xNwR5YKTU/V3SkSyC9T4YVOPh2zRQN0nhIQ==}
 
   '@tanstack/store@0.8.0':
     resolution: {integrity: sha512-Om+BO0YfMZe//X2z0uLF2j+75nQga6TpTJgLJQBiq85aOyZNIhkCgleNcud2KQg4k4v9Y9l+Uhru3qWMPGTOzQ==}
+
+  '@tanstack/table-core@8.21.3':
+    resolution: {integrity: sha512-ldZXEhOBb8Is7xLs01fR3YEc3DERiz5silj8tnGkFZytt1abEvl/GhUmCE0PMLaMPTa3Jk4HbKmRlHmu+gCftg==}
+    engines: {node: '>=12'}
 
   '@tokenizer/inflate@0.4.1':
     resolution: {integrity: sha512-2mAv+8pkG6GIZiF1kNg1jAjh27IDxEPKwdGul3snfztFerfPGI1LjDezZp3i7BElXompqEtPmoPx6c2wgtWsOA==}
@@ -2524,6 +2450,10 @@ packages:
     resolution: {integrity: sha512-nTjqfcBFEipKdXCv4YDQWCfmcLZKm81ldF0pAopTvyrFGVbcR6P/VAAd5G7N+0tTr8QqiU0tFadD6FK4NtJwOA==}
     engines: {node: '>= 0.6'}
 
+  copy-anything@4.0.5:
+    resolution: {integrity: sha512-7Vv6asjS4gMOuILabD3l739tsaxFQmC+a7pLZm02zyvs8p977bL3zEgq3yDk5rn9B0PbYgIv++jmHcuUab4RhA==}
+    engines: {node: '>=18'}
+
   cross-spawn@7.0.6:
     resolution: {integrity: sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==}
     engines: {node: '>= 8'}
@@ -2719,6 +2649,10 @@ packages:
 
   is-property@1.0.2:
     resolution: {integrity: sha512-Ks/IoX00TtClbGQr4TWXemAnktAQvYB7HzcCxDGqEZU6oCmb2INHuOoKxbtR+HFkmYWBKv/dOZtGRiAjDhj92g==}
+
+  is-what@5.5.0:
+    resolution: {integrity: sha512-oG7cgbmg5kLYae2N5IVd3jm2s+vldjxJzK1pcu9LfpGuQ93MQSzo0okvRna+7y5ifrD+20FE8FvjusyGaz14fw==}
+    engines: {node: '>=18'}
 
   isexe@2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
@@ -3066,6 +3000,11 @@ packages:
     resolution: {integrity: sha512-kXuQdQTB6oN3KhI6V4acnBSZx8D2I4xzZvn9+wFLLFCoBNQY/sFnCW6c43OL7pOQ2HvGV4lnWIXNmgfp7cTWhQ==}
     engines: {node: '>=20'}
 
+  qrcode.react@4.2.0:
+    resolution: {integrity: sha512-QpgqWi8rD9DsS9EP3z7BT+5lY5SFhsqGjpgW5DY/i3mK4M9DTBNz3ErMi8BWYEfI3L0d8GIbGmcdFAS1uIRGjA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+
   quansync@1.0.0:
     resolution: {integrity: sha512-5xZacEEufv3HSTPQuchrvV6soaiACMFnq1H8wkVioctoH3TRha9Sz66lOxRwPK/qZj7HPiSveih9yAyh98gvqA==}
 
@@ -3264,6 +3203,10 @@ packages:
         optional: true
       babel-plugin-macros:
         optional: true
+
+  superjson@2.2.6:
+    resolution: {integrity: sha512-H+ue8Zo4vJmV2nRjpx86P35lzwDT3nItnIsocgumgr0hHMQ+ZGq5vrERg9kJBo5AWGmxZDhzDo+WVIJqkB0cGA==}
+    engines: {node: '>=16'}
 
   tailwind-merge@3.4.0:
     resolution: {integrity: sha512-uSaO4gnW+b3Y2aWoWfFpX62vn2sR3skfhbjsEnaBI81WD1wBLlHZe5sWf0AqjksNdYTbGBEd0UasQMT3SNV15g==}
@@ -4967,9 +4910,17 @@ snapshots:
       react-dom: 19.1.2(react@19.1.2)
       use-sync-external-store: 1.6.0(react@19.1.2)
 
+  '@tanstack/react-table@8.21.3(react-dom@19.1.2(react@19.1.2))(react@19.1.2)':
+    dependencies:
+      '@tanstack/table-core': 8.21.3
+      react: 19.1.2
+      react-dom: 19.1.2(react@19.1.2)
+
   '@tanstack/store@0.7.7': {}
 
   '@tanstack/store@0.8.0': {}
+
+  '@tanstack/table-core@8.21.3': {}
 
   '@tokenizer/inflate@0.4.1':
     dependencies:
@@ -5168,6 +5119,10 @@ snapshots:
 
   content-type@1.0.5: {}
 
+  copy-anything@4.0.5:
+    dependencies:
+      is-what: 5.5.0
+
   cross-spawn@7.0.6:
     dependencies:
       path-key: 3.1.1
@@ -5344,6 +5299,8 @@ snapshots:
       react-dom: 19.1.2(react@19.1.2)
 
   is-property@1.0.2: {}
+
+  is-what@5.5.0: {}
 
   isexe@2.0.0: {}
 
@@ -5686,6 +5643,10 @@ snapshots:
     dependencies:
       hookified: 1.13.0
 
+  qrcode.react@4.2.0(react@19.1.2):
+    dependencies:
+      react: 19.1.2
+
   quansync@1.0.0: {}
 
   quick-format-unescaped@4.0.4: {}
@@ -5944,6 +5905,10 @@ snapshots:
     dependencies:
       client-only: 0.0.1
       react: 19.1.2
+
+  superjson@2.2.6:
+    dependencies:
+      copy-anything: 4.0.5
 
   tailwind-merge@3.4.0: {}
 

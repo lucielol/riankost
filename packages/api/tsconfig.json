@@ -1,10 +1,12 @@
 {
-  "extends": "@repo/config/tsconfig.base.json",
+  "extends": "@repo/config/tsconfig.base",
   "compilerOptions": {
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
     "outDir": "dist",
-    "composite": true
-  }
+    "composite": true,
+    "lib": ["ESNext", "DOM"]
+  },
+  "exclude": ["node_modules", "dist"]
 }

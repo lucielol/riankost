@@ -1,11 +1,10 @@
 import "dotenv/config";
 import { trpcServer } from "@hono/trpc-server";
 import { createContext } from "@repo/api/context";
-import { appRouter } from "@repo/api/routers/index";
+import { apiRouter, appRouter } from "@repo/api";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
-import router from "@/routes";
 
 const app = new Hono();
 
@@ -27,7 +26,7 @@ app.use(
   }),
 );
 
-app.route("/api", router);
+app.route("/api", apiRouter);
 
 app.use(
   "/trpc/*",

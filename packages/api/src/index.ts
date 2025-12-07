@@ -1,24 +1,16 @@
-import { initTRPC, TRPCError } from "@trpc/server";
-import type { Context } from "./context";
+import { Hono } from "hono";
+import authRouter from "./routes/auth";
+import userRouter from "./routes/user";
+import whatsappRouter from "./routes/whatsapp";
+import voucherRouter from "./routes/voucher";
 
-export const t = initTRPC.context<Context>().create();
+export const apiRouter = new Hono();
 
-export const router = t.router;
+apiRouter.route("/auth", authRouter);
+apiRouter.route("/user", userRouter);
+apiRouter.route("/whatsapp", whatsappRouter);
+apiRouter.route("/voucher", voucherRouter);
 
-export const publicProcedure = t.procedure;
-
-export const protectedProcedure = t.procedure.use(({ ctx, next }) => {
-  if (!ctx.session) {
-    throw new TRPCError({
-      code: "UNAUTHORIZED",
-      message: "Authentication required",
-      cause: "No session",
-    });
-  }
-  return next({
-    ctx: {
-      ...ctx,
-      session: ctx.session,
-    },
-  });
-});
+export { appRouter } from "./routers/index";
+export * from "./context";
+export * from "./lib/routeros";

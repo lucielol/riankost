@@ -10,14 +10,12 @@
     "start": "node dist/index.js"
   },
   "dependencies": {
-    "@hapi/boom": "^10.0.1",
     "@hono/node-server": "^1.14.4",
     "@hono/trpc-server": "^0.4.0",
     "@repo/api": "workspace:*",
     "@repo/auth": "workspace:*",
     "@repo/db": "workspace:*",
     "@trpc/server": "catalog:",
-    "baileys": "7.0.0-rc.9",
     "better-auth": "catalog:",
     "dotenv": "catalog:",
     "hono": "catalog:",

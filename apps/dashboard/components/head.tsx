@@ -30,7 +30,6 @@ export function Head({ title, breadcrumbs }: HeadProps) {
     setHeaderData,
   } = useHeader();
 
-  // If props are provided, update the context (Setter Mode)
   useEffect(() => {
     if (title || breadcrumbs) {
       setHeaderData({ title, breadcrumbs });
@@ -40,12 +39,10 @@ export function Head({ title, breadcrumbs }: HeadProps) {
     }
   }, [title, breadcrumbs, setHeaderData]);
 
-  // If props are provided, don't render anything (it's just a data setter)
   if (title || breadcrumbs) {
     return null;
   }
 
-  // If no props, render the UI using context data (Consumer Mode)
   const displayBreadcrumbs = contextBreadcrumbs || [
     {
       title: "Dashboard",

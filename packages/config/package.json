@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
-    "./react-library.json": "./react-library.json",
-    "./tsconfig.base.json": "./tsconfig.base.json"
+    "./*": "./*.ts",
+    "./*.json": "./*.json"
   }
 }

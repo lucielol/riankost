@@ -1,4 +1,4 @@
-import { UserController } from "@/controllers/user.controller";
+import { UserController } from "../controllers/user-controller";
 import { Hono } from "hono";
 
 const userRouter = new Hono();

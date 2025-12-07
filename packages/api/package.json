@@ -17,12 +17,15 @@
     "typescript": "^5"
   },
   "dependencies": {
-    "@trpc/server": "catalog:",
-    "@trpc/client": "catalog:",
-    "hono": "catalog:",
-    "dotenv": "catalog:",
-    "zod": "^4.1.11",
+    "@hapi/boom": "^10.0.1",
     "@repo/auth": "workspace:*",
-    "@repo/db": "workspace:*"
+    "@repo/db": "workspace:*",
+    "@trpc/client": "catalog:",
+    "@trpc/server": "catalog:",
+    "baileys": "7.0.0-rc.9",
+    "dotenv": "catalog:",
+    "hono": "catalog:",
+    "superjson": "^2.2.2",
+    "zod": "^4.1.11"
   }
 }

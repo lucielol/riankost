@@ -1,0 +1,18 @@
+model Voucher {
+  id        Int         @id @default(autoincrement())
+  code      String      @unique
+  user      Residents   @relation(fields: [userId], references: [id])
+  userId    Int
+  createdAt DateTime    @default(now())
+
+  @@map("vouchers")
+}
+
+model Residents {
+  id        Int       @id @default(autoincrement())
+  number    String    @unique
+  vouchers  Voucher[]
+  createdAt DateTime  @default(now())
+
+  @@map("residents")
+}

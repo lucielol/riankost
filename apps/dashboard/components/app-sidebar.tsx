@@ -11,6 +11,7 @@ import {
   Plus,
   Ticket,
   UsersRound,
+  BanknoteArrowUp
 } from "lucide-react";
 
 import {
@@ -75,6 +76,11 @@ const data = {
       title: "Whatsapp",
       url: "/whatsapp",
       icon: MessageCircle,
+    },
+    {
+      title: "Payments",
+      url: "/payments",
+      icon: BanknoteArrowUp
     },
     {
       title: "Users",
@@ -165,8 +171,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               <SidebarMenuItem key={item.title}>
                 <SidebarMenuButton asChild tooltip={item.title} isActive={pathname === item.url}>
                   <Link href={item.url as any}>
-                    {item.icon && <item.icon />}
-                    <span>{item.title}</span>
+                    {item.icon && (
+                      <div className="flex items-center justify-center">
+                        <span className="p-2 bg-sidebar-accent mr-1 rounded-lg">
+                          <item.icon className="size-4" />
+                        </span>
+                      </div>
+                    )}
+                    <span className="font-medium">{item.title}</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
