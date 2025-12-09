@@ -42,7 +42,7 @@ export default function Header() {
             </Link>
           ))}
           <Button asChild size="sm" variant="ghost">
-            <Link href="http://localhost:3002/login?callbackURL=http://localhost:3001/">Login</Link>
+            <Link href={`${process.env.NEXT_PUBLIC_AUTH_URL}` as any}>Login</Link>
           </Button>
           <Button asChild size="sm">
             <Link href={"#contact" as Route}>Hubungi Kami</Link>
@@ -74,7 +74,7 @@ export default function Header() {
               </Link>
             ))}
             <Button asChild className="w-full" variant="outline">
-              <Link href="http://localhost:3002/login?callbackURL=http://localhost:3001/" onClick={() => setIsMenuOpen(false)}>
+              <Link href={`${process.env.NEXT_PUBLIC_AUTH_URL}` as any} onClick={() => setIsMenuOpen(false)}>
                 Login
               </Link>
             </Button>

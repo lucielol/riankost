@@ -7,13 +7,16 @@ import {
   CardTitle,
 } from "@repo/ui/components/card";
 import { Activity, CreditCard, DollarSign, Users } from "lucide-react";
+import { useLanguage } from "@/contexts/language-context";
 
 export function Metrics() {
+  const { t } = useLanguage();
+
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
+          <CardTitle className="text-sm font-medium">{t("dashboard.totalRevenue")}</CardTitle>
           <DollarSign className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
@@ -25,7 +28,7 @@ export function Metrics() {
       </Card>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Subscriptions</CardTitle>
+          <CardTitle className="text-sm font-medium">{t("dashboard.totalUsers")}</CardTitle>
           <Users className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
@@ -37,7 +40,7 @@ export function Metrics() {
       </Card>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Sales</CardTitle>
+          <CardTitle className="text-sm font-medium">{t("payments.all")}</CardTitle>
           <CreditCard className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
@@ -47,7 +50,7 @@ export function Metrics() {
       </Card>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Active Now</CardTitle>
+          <CardTitle className="text-sm font-medium">{t("voucher.active")}</CardTitle>
           <Activity className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>

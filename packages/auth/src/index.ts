@@ -7,9 +7,8 @@ export const auth = betterAuth({
     provider: "postgresql",
   }),
   trustedOrigins: [
-    process.env.CORS_ORIGIN || "",
-    "http://localhost:3001",
-    "http://localhost:3002",
+    process.env.NEXT_PUBLIC_DASHBOARD_URL || "http://localhost:3001",
+    process.env.NEXT_PUBLIC_AUTH_URL || "http://localhost:3002",
   ],
   emailAndPassword: {
     enabled: true,

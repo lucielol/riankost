@@ -32,6 +32,30 @@ interface IRosUser {
   comment?: string;
 }
 
+interface ActiveVoucherList {
+  id: string;
+  username: string;
+  address: string;
+  "mac-address": string;
+  uptime: string;
+  "bytes-in": string;
+  "bytes-out": string;
+  "packets-in": string;
+  "packets-out": string;
+}
+
+interface IRosActiveUser {
+  ".id": string;
+  user: string;
+  address?: string;
+  "mac-address"?: string;
+  uptime?: string;
+  "bytes-in"?: string;
+  "bytes-out"?: string;
+  "packets-in"?: string;
+  "packets-out"?: string;
+}
+
 export default class VoucherController {
   // Get all vouchers
   getAll = async (ctx: Context) => {
@@ -95,6 +119,72 @@ export default class VoucherController {
 
       return ctx.json({
         error: "Failed to fetch vouchers",
+        message: error?.message || "Unknown error occurred"
+      }, 500);
+    } finally {
+      await microtik.disconnect().catch(() => { });
+    }
+  };
+
+  // Get active vouchers (currently online)
+  getActive = async (ctx: Context) => {
+    const microtik = new MicrotikConnection();
+    try {
+      const clientResult = await microtik.connect();
+
+      if (!clientResult.status) {
+        return ctx.json({
+          error: "Failed to connect to RouterOS",
+          message: clientResult.message,
+        }, 503);
+      }
+
+      const client = clientResult.data;
+      const activeUsersResult = await client.runCommand("/ip/hotspot/active/print");
+
+      if (!activeUsersResult.status) {
+        return ctx.json({
+          error: "Failed to fetch active users from RouterOS",
+          message: activeUsersResult.message,
+        }, 500);
+      }
+
+      const activeUsers = activeUsersResult.data as unknown as IRosActiveUser[];
+
+      const activeVouchers: ActiveVoucherList[] = activeUsers.map((user: IRosActiveUser) => ({
+        id: user[".id"],
+        username: user.user,
+        address: user.address || "",
+        "mac-address": user["mac-address"] || "",
+        uptime: user.uptime || "",
+        "bytes-in": user["bytes-in"] || "",
+        "bytes-out": user["bytes-out"] || "",
+        "packets-in": user["packets-in"] || "",
+        "packets-out": user["packets-out"] || "",
+      }));
+
+      return ctx.json({ activeVouchers });
+    } catch (error: any) {
+      console.error("Error fetching active vouchers from RouterOS:", error);
+
+      // Handle specific error types
+      if (error?.message?.includes("Timed out")) {
+        return ctx.json({
+          error: "RouterOS connection timeout",
+          message: "Unable to connect to RouterOS. Please check if the API service is enabled and the port is correctly configured.",
+          details: "Verify that port forwarding maps to the API service (default 8728), not Winbox (8291)"
+        }, 503);
+      }
+
+      if (error?.message?.includes("ECONNREFUSED")) {
+        return ctx.json({
+          error: "Connection refused",
+          message: "RouterOS refused the connection. The service may be disabled or blocked by firewall."
+        }, 503);
+      }
+
+      return ctx.json({
+        error: "Failed to fetch active vouchers",
         message: error?.message || "Unknown error occurred"
       }, 500);
     } finally {

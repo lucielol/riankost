@@ -12,12 +12,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@repo/ui/components/card";
+import { useLanguage } from "@/contexts/language-context";
 
 export function RecentSales() {
+  const { t } = useLanguage();
+
   return (
     <Card className="col-span-3">
       <CardHeader>
-        <CardTitle>Recent Payments</CardTitle>
+        <CardTitle>{t("dashboard.recentActivity")}</CardTitle>
         <CardDescription>You made 265 payments this month.</CardDescription>
       </CardHeader>
       <CardContent>

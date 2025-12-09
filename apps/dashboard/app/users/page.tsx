@@ -14,6 +14,7 @@ import {
 } from "@repo/ui/components/dropdown-menu";
 import { Input } from "@repo/ui/components/input";
 import { MoreHorizontal, Plus, Search } from "lucide-react";
+import { useLanguage } from "@/contexts/language-context";
 
 // Mock Data
 const users = [
@@ -60,13 +61,15 @@ const users = [
 ];
 
 export default function UsersPage() {
+  const { t } = useLanguage();
+
   return (
-    <div className="flex flex-1 flex-col gap-4 p-4 pt-3">
+    <>
       <Head
-        title="Users"
+        title={t("users.title")}
         breadcrumbs={[
-          { title: "Dashboard", href: "/" },
-          { title: "Users", href: "/users" },
+          { title: t("sidebar.dashboard"), href: "/" },
+          { title: t("users.title"), href: "/users" },
         ]}
       />
 
@@ -76,7 +79,7 @@ export default function UsersPage() {
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
               type="search"
-              placeholder="Search users..."
+              placeholder={t("users.title") + "..."}
               className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[320px]"
             />
           </div>
@@ -84,7 +87,7 @@ export default function UsersPage() {
         <Button size="sm" className="h-8 gap-1">
           <Plus className="h-3.5 w-3.5" />
           <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-            Add User
+            {t("users.addUser")}
           </span>
         </Button>
       </div>
@@ -98,13 +101,13 @@ export default function UsersPage() {
                   User
                 </th>
                 <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0">
-                  Role
+                  {t("users.role")}
                 </th>
                 <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0">
-                  Status
+                  {t("common.status")}
                 </th>
                 <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0">
-                  <span className="sr-only">Actions</span>
+                  <span className="sr-only">{t("common.actions")}</span>
                 </th>
               </tr>
             </thead>
@@ -148,17 +151,17 @@ export default function UsersPage() {
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                        <DropdownMenuLabel>{t("common.actions")}</DropdownMenuLabel>
                         <DropdownMenuItem
                           onClick={() => navigator.clipboard.writeText(user.id)}
                         >
                           Copy user ID
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>View details</DropdownMenuItem>
-                        <DropdownMenuItem>Edit user</DropdownMenuItem>
+                        <DropdownMenuItem>{t("payments.viewDetails")}</DropdownMenuItem>
+                        <DropdownMenuItem>{t("users.editUser")}</DropdownMenuItem>
                         <DropdownMenuItem className="text-destructive">
-                          Delete user
+                          {t("users.deleteUser")}
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
@@ -169,6 +172,6 @@ export default function UsersPage() {
           </table>
         </div>
       </div>
-    </div>
+    </>
   );
 }

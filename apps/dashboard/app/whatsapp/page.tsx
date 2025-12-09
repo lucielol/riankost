@@ -19,15 +19,51 @@ import {
   Ticket,
 } from "lucide-react";
 import { useState } from "react";
+import {
+  WhatsappConnectingSkeleton,
+  WhatsappConnectedSkeleton
+} from "@/app/whatsapp/_partials/skeleton";
 
 export default function WhatsappPage() {
-  const { status, user, disconnect } = useWhatsapp();
+  const { status, user, disconnect, isLoading } = useWhatsapp();
   const isConnected = status === "connected";
   const [loginMethod, setLoginMethod] = useState<"qr" | "phone">("qr");
 
+  // Show skeleton when loading
+  if (isLoading) {
+    return (
+      <>
+        <Head
+          title="Whatsapp"
+          breadcrumbs={[
+            { title: "Dashboard", href: "/" },
+            { title: "Whatsapp", href: "/whatsapp" },
+          ]}
+        />
+        <WhatsappConnectingSkeleton />
+      </>
+    );
+  }
+
+  // Show connecting skeleton when status is connecting
+  if (status === "connecting") {
+    return (
+      <>
+        <Head
+          title="Whatsapp"
+          breadcrumbs={[
+            { title: "Dashboard", href: "/" },
+            { title: "Whatsapp", href: "/whatsapp" },
+          ]}
+        />
+        <WhatsappConnectingSkeleton />
+      </>
+    );
+  }
+
   if (isConnected) {
     return (
-      <div className="flex flex-1 flex-col gap-4 p-4 pt-3">
+      <>
         <Head
           title="Whatsapp"
           breadcrumbs={[
@@ -118,12 +154,12 @@ export default function WhatsappPage() {
           </div>
 
         </div>
-      </div>
+      </>
     );
   }
 
   return (
-    <div className="flex flex-1 flex-col gap-4 p-4 pt-3">
+    <>
       <Head
         title="Whatsapp"
         breadcrumbs={[
@@ -207,6 +243,6 @@ export default function WhatsappPage() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

@@ -6,6 +6,7 @@ const voucherController = new VoucherController();
 
 voucherRouter.get("/", voucherController.getAll);
 voucherRouter.post("/", voucherController.create);
+voucherRouter.get("/active", voucherController.getActive);
 voucherRouter.get("/status", voucherController.getStatus);
 voucherRouter.post("/toggle", voucherController.toggleStatus);
 

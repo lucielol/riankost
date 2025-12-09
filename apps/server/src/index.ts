@@ -12,14 +12,10 @@ app.use(logger());
 app.use(
   "/*",
   cors({
-    origin: (origin) => {
-      const allowed = [
-        process.env.CORS_ORIGIN || "",
-        "http://localhost:3001",
-        "http://localhost:3002",
-      ];
-      return allowed.includes(origin) ? origin : process.env.CORS_ORIGIN || "";
-    },
+    origin: [
+      process.env.NEXT_PUBLIC_DASHBOARD_URL || "http://localhost:3001",
+      process.env.NEXT_PUBLIC_AUTH_URL || "http://localhost:3002",
+    ],
     allowMethods: ["GET", "POST", "OPTIONS"],
     allowHeaders: ["Content-Type", "Authorization"],
     credentials: true,

@@ -6,6 +6,7 @@ import { queryClient } from "@repo/ui/utils/trpc";
 import { ThemeProvider } from "./theme-provider";
 import { Toaster } from "@repo/ui/components/sonner";
 import { HeaderProvider } from "@/contexts/header-context";
+import { LanguageProvider } from "@/contexts/language-context";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -15,13 +16,15 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       enableSystem
       disableTransitionOnChange
     >
-      <HeaderProvider>
-        <QueryClientProvider client={queryClient}>
-          {children}
-          <ReactQueryDevtools />
-        </QueryClientProvider>
-        <Toaster richColors />
-      </HeaderProvider>
+      <LanguageProvider>
+        <HeaderProvider>
+          <QueryClientProvider client={queryClient}>
+            {children}
+            <ReactQueryDevtools />
+          </QueryClientProvider>
+          <Toaster richColors />
+        </HeaderProvider>
+      </LanguageProvider>
     </ThemeProvider>
   );
 }

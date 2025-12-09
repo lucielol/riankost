@@ -1,5 +1,6 @@
 import { Head } from "@/components/head";
 import { UserNav } from "@/components/user-nav";
+import { LanguageSwitcher } from "@/components/language-switcher";
 
 export function Navbar() {
   return (
@@ -7,6 +8,7 @@ export function Navbar() {
       <div className="flex items-center gap-2 px-4 w-full">
         <Head />
         <div className="ml-auto flex items-center gap-2">
+          <LanguageSwitcher />
           <UserNav />
         </div>
       </div>

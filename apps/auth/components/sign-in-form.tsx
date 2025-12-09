@@ -29,14 +29,8 @@ export default function SignInForm({
         },
         {
           onSuccess: () => {
-            const searchParams = new URLSearchParams(window.location.search);
-            const callbackURL = searchParams.get("callbackURL");
-
-            if (callbackURL) {
-              window.location.href = callbackURL;
-            } else {
-              router.push("/dashboard");
-            }
+            const dashboardUrl = process.env.NEXT_PUBLIC_DASHBOARD_URL || "http://localhost:3001";
+            router.push(dashboardUrl as any);
             toast.success("Sign in successful");
           },
           onError: (error) => {

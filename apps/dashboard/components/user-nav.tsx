@@ -35,12 +35,14 @@ import { authClient } from "@repo/ui/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { Button } from "@repo/ui/components/button";
 import { useTheme } from "next-themes";
+import { useLanguage } from "@/contexts/language-context";
 import { useEffect, useState } from "react";
 
 export function UserNav() {
   const router = useRouter();
   const { data: session } = authClient.useSession();
   const { theme, setTheme } = useTheme();
+  const { t } = useLanguage();
   const [isThemeOpen, setIsThemeOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -86,11 +88,11 @@ export function UserNav() {
         <DropdownMenuGroup>
           <DropdownMenuItem>
             <CircleUserRound className="mr-2 h-4 w-4" />
-            Profile
+            {t("navbar.profile")}
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Settings className="mr-2 h-4 w-4" />
-            Settings
+            {t("navbar.settings")}
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuGroup>
@@ -114,7 +116,7 @@ export function UserNav() {
                   {theme === "system" && <Laptop className="mr-4 h-4 w-4" />}
                 </>
               )}
-              <span>Theme</span>
+              <span>{t("navbar.theme")}</span>
             </div>
             <ChevronDown
               className={`h-4 w-4 transition-transform ${isThemeOpen ? "rotate-180" : ""
@@ -128,21 +130,21 @@ export function UserNav() {
                 className="pl-8"
               >
                 <Sun className="mr-2 h-4 w-4" />
-                Light
+                {t("navbar.themeLight")}
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={() => setTheme("dark")}
                 className="pl-8"
               >
                 <Moon className="mr-2 h-4 w-4" />
-                Dark
+                {t("navbar.themeDark")}
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={() => setTheme("system")}
                 className="pl-8"
               >
                 <Laptop className="mr-2 h-4 w-4" />
-                System
+                {t("navbar.themeSystem")}
               </DropdownMenuItem>
             </>
           )}
@@ -150,7 +152,7 @@ export function UserNav() {
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleLogout}>
           <LogOut className="mr-2 h-4 w-4" />
-          Log out
+          {t("navbar.logout")}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

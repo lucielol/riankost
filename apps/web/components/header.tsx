@@ -6,7 +6,7 @@ import UserMenu from "./user-menu";
 export default function Header() {
   const links = [
     { to: "/", label: "Home" },
-    { to: "http://localhost:3001/", label: "Dashboard" },
+    { to: (process.env.NEXT_PUBLIC_DASHBOARD_URL || "http://localhost:3001/") as any, label: "Dashboard" },
   ] as const;
 
   return (

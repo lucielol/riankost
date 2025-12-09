@@ -3,7 +3,6 @@
 import { type ColumnDef } from "@tanstack/react-table";
 import { Badge } from "@repo/ui/components/badge";
 import { Button } from "@repo/ui/components/button";
-import { Checkbox } from "@repo/ui/components/checkbox";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,6 +12,8 @@ import {
 import { Copy, MoreHorizontal, ArrowUpDown, Pencil, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import type { Voucher } from "@/types";
+import type { ActiveVoucher } from "@/hooks/use-voucher";
+import { DeviceCountBadge } from "@/app/voucher/_partials/device-count";
 
 const copyToClipboard = (text: string) => {
   navigator.clipboard.writeText(text);
@@ -22,12 +23,15 @@ const copyToClipboard = (text: string) => {
 };
 
 const formatBytes = (bytes: string): string => {
+  if (!bytes || bytes === "") return "0 B";
   const num = parseInt(bytes);
   if (isNaN(num) || num === 0) return "0 B";
+
   const k = 1024;
-  const sizes = ["B", "KB", "MB", "GB"];
-  const i = Math.floor(Math.log(num) / Math.log(k));
-  return Math.round(num / Math.pow(k, i) * 100) / 100 + " " + sizes[i];
+  const sizes = ["B", "KB", "MB", "GB", "TB"];
+  const i = Math.min(Math.floor(Math.log(num) / Math.log(k)), sizes.length - 1);
+
+  return (Math.round((num / Math.pow(k, i)) * 100) / 100) + " " + sizes[i];
 };
 
 const formatUptime = (uptime: string): string => {
@@ -45,34 +49,11 @@ const formatUptime = (uptime: string): string => {
   if (days) parts.push(`${days[1]}d`);
   if (hours) parts.push(`${hours[1]}h`);
   if (minutes) parts.push(`${minutes[1]}m`);
-  if (seconds && parts.length === 0) parts.push(`${seconds[1]}s`);
 
-  return parts.slice(0, 2).join(" ") || "0s";
+  return parts.length > 0 ? parts.join(" ") : "0s";
 };
 
-export const columns: ColumnDef<Voucher>[] = [
-  {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
+export const getColumns = (activeVouchers: ActiveVoucher[] = []): ColumnDef<Voucher>[] => [
   {
     accessorKey: "username",
     header: ({ column }) => {
@@ -88,18 +69,22 @@ export const columns: ColumnDef<Voucher>[] = [
     },
     cell: ({ row }) => {
       const username = row.getValue("username") as string;
+
       return (
-        <div className="flex items-center gap-2 font-mono">
-          {username}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="h-6 w-6 text-muted-foreground hover:text-foreground"
-            onClick={() => copyToClipboard(username)}
-          >
-            <Copy className="h-3 w-3" />
-            <span className="sr-only">Copy username</span>
-          </Button>
+        <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 font-mono">
+            {username}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-6 w-6 text-muted-foreground hover:text-foreground"
+              onClick={() => copyToClipboard(username)}
+            >
+              <Copy className="h-3 w-3" />
+              <span className="sr-only">Copy username</span>
+            </Button>
+          </div>
+          <DeviceCountBadge username={username} activeVouchers={activeVouchers} />
         </div>
       );
     },
@@ -150,14 +135,23 @@ export const columns: ColumnDef<Voucher>[] = [
     cell: ({ row }) => {
       const disabled = row.getValue("disabled") as string;
       const isDynamic = row.original.dynamic === "true";
+      const isActive = disabled === "false";
 
       return (
-        <div className="flex gap-1">
-          <Badge variant={disabled === "false" ? "outline" : "secondary"}>
-            {disabled === "false" ? "Active" : "Disabled"}
+        <div className="flex gap-1.5">
+          <Badge
+            variant={isActive ? "default" : "destructive"}
+            className={isActive
+              ? "bg-green-500/10 text-green-600 border-green-500/20 hover:bg-green-500/20"
+              : "bg-red-500/10 text-red-600 border-red-500/20 hover:bg-red-500/20"
+            }
+          >
+            {isActive ? "Active" : "Disabled"}
           </Badge>
           {isDynamic && (
-            <Badge variant="default">Dynamic</Badge>
+            <Badge variant="default" className="bg-blue-500/10 text-blue-600 border-blue-500/20">
+              Dynamic
+            </Badge>
           )}
         </div>
       );
@@ -178,17 +172,17 @@ export const columns: ColumnDef<Voucher>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuItem>
-              <Pencil className="mr-2 h-4 w-4" />
+              <Pencil className="mr-0.5 h-4 w-4" />
               Edit
             </DropdownMenuItem>
             {voucher.password === voucher.username && (
               <DropdownMenuItem onClick={() => copyToClipboard(voucher.username!)}>
-                <Copy className="mr-2 h-4 w-4" />
+                <Copy className="mr-0.5 h-4 w-4" />
                 Copy Code
               </DropdownMenuItem>
             )}
             <DropdownMenuItem className="text-destructive">
-              <Trash2 className="mr-2 h-4 w-4" />
+              <Trash2 className="mr-0.5 h-4 w-4" />
               Delete
             </DropdownMenuItem>
           </DropdownMenuContent>
@@ -198,3 +192,5 @@ export const columns: ColumnDef<Voucher>[] = [
   },
 ];
 
+// Backward compatibility export
+export const columns = getColumns([]);
